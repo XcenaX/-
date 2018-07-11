@@ -1,0 +1,39 @@
+--create procedure Vlad_1
+--@ip int
+--as
+--select [код клиента] = @ip from dbo.Договора
+--where [дата начала тура] between '2018-01-01' and '2018-12-30'
+
+--create procedure Vlad_2
+--as
+--select * from [Клиенты]
+--where пол like 'женский'
+--and [дата рождения] between '2000-01-01' and '2007-01-01'
+
+--create procedure Vlad_3
+--@Name1 nvarchar(20)
+--@Name2 nvarchar(20)
+--@Name3 nvarchar(20)
+--as
+--insert Страны ([Код Страны],[наименование]) 
+--values (
+--newid()
+--,@name1
+--)
+--insert Страны ([Код Страны],[наименование]) 
+--values (
+--newid()
+--,@name2
+--)
+--insert Страны ([Код Страны],[наименование]) 
+--values (
+--newid()
+--,@name3
+--)
+
+--create procedure Vlad_4
+--@id_dogovor int
+--as
+--select [номер договора] = @id_dogovor,
+-- day([дата окончания тура])-day([дата начала тура])
+-- from dbo.Договора

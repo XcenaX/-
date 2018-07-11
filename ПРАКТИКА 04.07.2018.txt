@@ -1,0 +1,39 @@
+
+Ѕаза данных находитс€ на сервере sql называетс€ ”чет_ѕродаж_Ћебедев
+
+CREATE FUNCTION Factorial -- ‘ункци€ вы€исл€юща€ факториал
+(
+@num int
+)
+RETURNS int
+AS
+BEGIN
+declare @i int
+
+if @num >0 begin
+select @i = 1
+while @i < @num begin
+select @num = @num*@i
+select @i = @i + 1
+end
+end
+
+else if @num = 0 return 1
+
+return @num
+END
+
+
+
+CREATE TRIGGER Delete_Sale -- “риггер который срабатывает при удалаении товара, удал€ет все сделки св€занные с этим товаром
+   ON  dbo.Salers 
+   AFTER delete
+AS 
+BEGIN
+	declare @snum int
+	select @snum = snum from Salers
+	
+	delete from dbo.Orders
+	where snum = @snum
+
+END

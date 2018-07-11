@@ -1,0 +1,54 @@
+База данных находится на сервере sql называется Учет больничных листов(Лебедев)
+
+create nonclustered index id
+ on
+dbo.Должности(ID)
+
+create nonclustered index id
+ on
+dbo.Цеха(ID)
+
+create nonclustered index id
+ on
+dbo.Больничный(ID)
+
+create nonclustered index id
+ on
+dbo.Рабочий(ID)
+
+
+1 представление 
+SELECT        dbo.Рабочий.WorkerName, dbo.Должности.SpecName, dbo.Цеха.DeptName
+FROM            dbo.Рабочий INNER JOIN
+                         dbo.Больничный ON dbo.Рабочий.ID = dbo.Больничный.WorkerID INNER JOIN
+                         dbo.Должности ON dbo.Рабочий.SpecID = dbo.Должности.ID INNER JOIN
+                         dbo.Цеха ON dbo.Рабочий.DeptID = dbo.Цеха.ID
+
+
+2 представлние
+
+SELECT        dbo.Рабочий.WorkerName, dbo.Больничный.StartDate, dbo.Больничный.EndDate
+FROM            dbo.Рабочий INNER JOIN
+                         dbo.Больничный ON dbo.Рабочий.ID = dbo.Больничный.WorkerID
+
+3 представлние
+
+
+SELECT        dbo.Рабочий.WorkerName, dbo.Больничный.StartDate, dbo.Больничный.EndDate
+FROM            dbo.Больничный INNER JOIN
+                         dbo.Рабочий ON dbo.Больничный.WorkerID = dbo.Рабочий.ID
+WHERE        (dbo.Больничный.StartDate BETWEEN "2017-07-01" AND "2017-07-28")
+
+
+
+create procedure Change(@FIO nvarchar(30),@id int)
+as
+update dbo.Рабочий
+set dbo.Рабочий.SpecID = @id
+where dbo.Рабочий.WorkerName like @FIO
+
+
+
+create procedure Salary
+as
+select dbo.Рабочий.Salary*0.7 from dbo.Рабочий

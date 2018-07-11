@@ -1,0 +1,12 @@
+create Function Vlad_1(@num1 int,@num2 int,@num3 int) returns int as
+begin
+return (@num1+@num2+@num3)/3
+end
+
+
+create Function Vlad_1(@date date) returns int as
+begin
+return 2018 - year(@date)
+end
+
+
